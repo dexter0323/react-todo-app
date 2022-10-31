@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { add } from "../store/todos"
 
 export function Header() {
   const [task, setTask] = useState("")
+  const dispatch = useDispatch()
 
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
-      // TODO: Submit new task
-      console.log(task)
+      dispatch(add(task))
+      setTask("")
     }
   }
 
   useEffect(() => {
-    console.log(task)
+    // console.log(task)
   }, [task])
 
   return (
