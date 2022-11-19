@@ -6,7 +6,6 @@ export function Task(task) {
   const dispatch = useDispatch()
 
   const onDeleteTask = async () => {
-    debugger
     await removeTodo(task.id)
     dispatch(remove(task))
   }
