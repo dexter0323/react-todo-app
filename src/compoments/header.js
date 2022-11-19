@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { add } from "../store/todos"
+import { add } from "../reducers/todos"
+import { createTodo } from "../actions/todos"
 
 export function Header() {
   const [task, setTask] = useState("")
   const dispatch = useDispatch()
 
-  const onKeyDown = (e) => {
+  const onKeyDown = async (e) => {
     if (e.key === "Enter") {
-      dispatch(add(task))
+      const newTask = await createTodo(task)
+      dispatch(add(newTask))
       setTask("")
     }
   }
@@ -26,6 +28,10 @@ export function Header() {
         onChange={(e) => setTask(e.currentTarget.value)}
         onKeyDown={onKeyDown}
       />
+      <hgroup>
+        <h3>PENDING</h3>
+        <h3>COMPLETED</h3>
+      </hgroup>
     </header>
   )
 }
